@@ -6,9 +6,9 @@
     //在初始化组件之前要先注册
     Vue.component('tenant-account',{
         template:`
-        <div>
-        <h3>账号管理</h3>
         <div class="animated fadeInRight">
+        <h3>账号管理</h3>
+        <div>
         <div id="dtGridContainer_2_1_2" class="dt-grid-container"></div>
         <div id="dtGridToolBarContainer_2_1_2" class="dt-grid-toolbar-container"></div>
 </div>

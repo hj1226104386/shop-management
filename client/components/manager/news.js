@@ -39,7 +39,7 @@
                                         <div class="vertical-timeline-content">
                                             <h2>修改</h2>
                                             <p><strong>乐天超市</strong>调整了:<strong style="color:red;">飞科剃须刀</strong></p>
-                                            <a href="#" class="btn btn-sm btn-info" @click="getTwo">查看详情</a>
+                                            <a href="#" class="btn btn-sm btn-success" @click="getTwo">查看详情</a>
                                             <span class="vertical-date">
                                         今天 <br>
                                         <small>5月31日</small>
@@ -55,7 +55,7 @@
                                         <div class="vertical-timeline-content">
                                             <h2>下架</h2>
                                             <p><strong>便利蜂</strong>下架了:<strong style="color:red;">泰国进口榴莲</strong></p>
-                                            <a href="#" class="btn btn-sm btn-primary" @click="getThree">查看详情</a>
+                                            <a href="#" class="btn btn-sm btn-success" @click="getThree">查看详情</a>
                                             <span class="vertical-date"> 今天 <br><small>5月31日</small></span>
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                                         <div class="vertical-timeline-content">
                                             <h2>修改</h2>
                                             <p><strong>云南过桥米线育新店</strong>调整了:<strong style="color:red;">大瓶装雪碧</strong></p>
-                                            <a href="#" class="btn btn-sm btn-info" @click="getFour">查看详情</a>
+                                            <a href="#" class="btn btn-sm btn-success" @click="getFour">查看详情</a>
                                             <span class="vertical-date">昨天 <br><small>5月30日</small></span>
                                         </div>
                                     </div>
@@ -210,6 +210,8 @@
                         operationType:'上架',
                         goodsMsg:'米老头雪米饼(美味停不下来)',
                         operationTime:'2017-5-28 12:12',
+                        oldPrice:'22.00',
+                        nowPrice:'15.00',
                         number:'3221',
                         soldOut:'1452'
                     }
