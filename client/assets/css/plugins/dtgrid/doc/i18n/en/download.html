@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<head>
+	<title>DT Grid, DESTINY Grid Download</title>
+	<meta name="Keywords" content="DT Grid,DESTINY Grid, What is DT Grid, DT Grid Example, DT Grid Reference, DT Grid Download, Responsive Grid, jQuery Grid Controls, JavaScript, Cross Brower"/>
+	<meta name="Description" content="DESTINY Grid(DT Grid) is a responsive grid by DaLian ShouWen Technology Co., it's based on MIT open source licenses. It's with cross brower support, procedures clear, powerful, efficient load, and many other good qualities, it perhaps the best known reponstive grid controls."/>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<!-- favicon -->
+	<link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+	<!-- jQuery -->
+	<script type="text/javascript" src="../../../dependents/jquery/jquery.min.js"></script>
+	<!-- bootstrap -->
+	<script type="text/javascript" src="../../../dependents/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../../dependents/bootstrap/css/bootstrap.min.css" />
+	<!--[if lt IE 9]>
+		<script src="../../../dependents/bootstrap/plugins/ie/html5shiv.js"></script>
+		<script src="../../../dependents/bootstrap/plugins/ie/respond.js"></script>
+	<![endif]-->
+	<!--[if lt IE 8]>
+		<script src="../../../dependents/bootstrap/plugins/ie/json2.js"></script>
+	<![endif]-->
+	<!-- font-awesome -->
+	<link rel="stylesheet" type="text/css" href="../../../dependents/fontAwesome/css/font-awesome.min.css" media="all" />
+	<!-- toTop -->
+	<script type="text/javascript" src="../../toTop/jquery.toTop.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../toTop/jquery.toTop.css" />
+	<!-- jquery pin -->
+	<script type="text/javascript" src="../../jquery.pin/jquery.pin.js"></script>
+	<!-- doc css -->
+	<link rel="stylesheet" type="text/css" href="../../css/doc.css" />
+	<!-- icon css -->
+	<link rel="stylesheet" type="text/css" href="../../css/icons.css" />
+	<script type="text/javascript">
+	$(function(){
+		//Pin the Left Sider
+		$(".left-sider").pin({
+			minWidth: 992,
+			pinCallback : function(){
+				$(".left-sider").css('max-height', $(window).height()-112);
+			},
+			unpinCallback : function(){
+				$(".left-sider").css('max-height', $(window).height()-112);
+			}
+		});
+		//Show or Hide the Left Sider's Sub Menu
+		$(".left-sider>ul>li>a").toggle(function(){
+			$(this).children('i').removeClass('fa-caret-right').addClass('fa-caret-down');
+			$(this).next('ul').slideDown(200);
+		}, function(){
+			$(this).children('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+			$(this).next('ul').slideUp(200);
+		});
+		//All Close Except the First Menu
+		$(".left-sider>ul>li>ul:not(:first)").hide();
+		$(".left-sider>ul>li>a:first").click();
+	});
+	</script>
+</head>
+<body>
+	<header class="navbar navbar-inverse navbar-absolute-top" role="banner">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+					<span class="sr-only">Tools</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="http://www.dtgrid.com" class="navbar-brand">
+					<i class="icon icon-destiny-grid"></i>&nbsp;&nbsp;DESTINY Grid
+				</a>
+			</div>
+			<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+				<ul class="nav navbar-nav">
+					<li id="nav_home">
+						<a href="index.html"><i class="fa fa-home"></i>&nbsp;&nbsp;Home</a>
+					</li>
+					<li id="nav_example">
+						<a href="example.html"><i class="fa fa-table"></i>&nbsp;&nbsp;Example</a>
+					</li>
+					<li id="nav_reference">
+						<a href="reference.html"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;Reference</a>
+					</li>
+					<li id="nav_download" class="active">
+						<a href="download.html"><i class="fa fa-download"></i>&nbsp;&nbsp;Download</a>
+					</li>
+					<li id="nav_about">
+						<a href="about.html"><i class="fa fa-info"></i>&nbsp;&nbsp;About</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li id="nav_donate" class="language">
+						<a href="javascript:void(0);" data-toggle="dropdown"><i class="fa fa-language"></i>&nbsp;&nbsp;Language</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="javascript:void(0);">English</a></li>
+							<li><a href="../zh-cn/download.html">Simple Chinese</a></li>
+						</ul>
+					</li>
+					<li id="nav_donate" class="donate">
+						<a href="donate.html"><i class="fa fa-usd"></i>&nbsp;&nbsp;Donate</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<div class="container">
+		<div class="col-md-3">
+			<div class="layout left-sider">
+				<ul>
+					<li>
+						<a href="#4.1"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;DT Grid Download</a>
+						<ul>
+							<li><a href="#4.1.1">Version 1.1.9<span class="label label-danger label-doc">New</span></a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#4.2"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;DT Grid Project Download</a>
+						<ul>
+							<li><a href="#4.2.1">Version 1.1.9 - Java<span class="label label-danger label-doc">New</span></a></li>
+							<li><a href="#4.2.2">Version 1.1.9 - Php<span class="label label-danger label-doc">New</span></a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#4.3"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;History</a>
+						<ul>
+							<li><a href="#4.3.1">Version 1.1.8</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="layout main-container">
+				<div id="4.1" class="title">DT Grid Download</div>
+				<hr />
+				<div id="4.1.1" class="sub-title">Version 1.1.9<span class="label label-danger label-doc">New</span></div>
+				<p>Welcome to download the DT Grid, we hope our products can give your project some help. If you hope that the long-term cooperation with us, please contact us as follows:</p>
+				<p><a href="mailto:dtgrid@outlook.com"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;Email：dtgrid@outlook.com</a></p>
+				<p class="attention">Update: </p>
+				<p class="attr"><code>1</code>. Change the load type of international, add parameter lang in grid options, multiple languages can coexist in one page.</p>
+				<p class="attr"><code>2</code>. Improve grid events, add event parameters, please refer to the example and reference documents.</p>
+				<p class="attr"><code>3</code>. Modified the number of record per page, support select, input, the original display types, please refer to the pageSizeLimit parameter in the table options.</p>
+				<p class="attr"><code>4</code>. Update resolution parameter, improve the callback method arguments.</p>
+				<p class="attr"><code>5</code>. Fix can't jump page when user click the page button in Internet Explorer(Less or Equals Version 8).</p>
+				<p class="attr"><code>6</code>. Fix go to page's top when user do the print.</p>
+				<p class="attr"><code>7</code>. Add the background color style when cell hover.</p>
+				<p class="attr"><code>8</code>. Add the cursor is pointer when header hover.</p>
+				<p class="attr"><code>9</code>. Add the English, the browser loads the document language by browser language, you can also switch the document language by manual.</p>
+				<p class="attr"><code>10</code>. Fix the process bar and loading complete not synchronized by 100 millisecond delay.</p>
+				<p class="attr"><code>11</code>. Add custom transfer parameters example.</p>
+				<p class="attr"><code>12</code>. Java, Php server code using prepare statement mode to avoid the SQL injection.</p>
+				<p class="attr"><code>13</code>. Add interaction parameters, DT Grid object options in the reference.</p>
+				<p class="attention">Will support in next version: </p>
+				<p class="attr"><code>1</code>. Online editing.</p>
+				<p class="attr"><code>2</code>. Custom complex head.</p>
+				<p class="attr"><code>3</code>. Pin head.</p>
+				<p class="attr"><code>4</code>. Add the sever documents.</p>
+				<p class="attr"><code>5</code>. Other languages support(Japanese, Korean).</p>
+				<p class="attr attention">
+					<code>6</code>. If you have some need to add in future, please contact us as follow: 
+					&nbsp;&nbsp;<a href="mailto:dtgrid@outlook.com"><i class="fa fa-envelope-o"></i></a>.
+				</p>
+				<p>Our products are completely independent development, if you plenty of money, welcome you to donate us, thanks for your support.</p>
+				<p>
+					<a class="btn btn-success" href="http://www.dtgrid.com/download/v1.1.9/jquery.dtGrid.v1.1.9.zip" target="_blank">
+						<i class="fa fa-download"></i>&nbsp;&nbsp;Local
+					</a>
+					<a class="btn btn-success" href="https://github.com/dlshouwen/dtgrid/blob/master/projects/v1.1.9/jquery.dtGrid.v1.1.9.zip" target="_blank">
+						<i class="fa fa-github"></i>&nbsp;&nbsp;GitHub
+					</a>
+					<a class="btn btn-success" href="http://git.oschina.net/dlshouwen/dtgrid/blob/master/projects/v1.1.9/jquery.dtGrid.v1.1.9.zip" target="_blank">
+						<i class="fa fa-git"></i>&nbsp;&nbsp;Git@OSC
+					</a>
+					<a class="btn btn-danger" href="donate.html">
+						<i class="fa fa-usd"></i>&nbsp;&nbsp;Donate
+					</a>
+				</p>
+				<div id="4.2" class="title">DT Grid Project Download</div>
+				<hr />
+				<div id="4.2.1" class="sub-title">Version 1.1.9 - Java<span class="label label-danger label-doc">New</span></div>
+				<p>This project uses Spring + Spring MVC + JDBC Template, if you not using those, you can modified for servlet, you only ensure that the return value is the JSON object or JSON array format just like this project.</p>
+				<p>In this project the database uses MySQL, if you need to transplant to other databases, you can modified some SQL, such as paging function in sever etc..</p>
+				<p>If you cannot do the transplantation youself, you can contact us:</p>
+				<p><a href="mailto:dtgrid@outlook.com"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;Email：dtgrid@outlook.com</a></p>
+				<p>
+					<a class="btn btn-success" href="http://www.dtgrid.com/download/v1.1.9/jquery.dtGrid.v1.1.9.Java.Web.App.zip" target="_blank">
+						<i class="fa fa-download"></i>&nbsp;&nbsp;Local
+					</a>
+					<a class="btn btn-success" href="https://github.com/dlshouwen/dtgrid/blob/master/projects/v1.1.9/jquery.dtGrid.v1.1.9.Java.Web.App.zip" target="_blank">
+						<i class="fa fa-github"></i>&nbsp;&nbsp;GitHub
+					</a>
+					<a class="btn btn-success" href="http://git.oschina.net/dlshouwen/dtgrid/blob/master/projects/v1.1.9/jquery.dtGrid.v1.1.9.Java.Web.App.zip" target="_blank">
+						<i class="fa fa-git"></i>&nbsp;&nbsp;Git@OSC
+					</a>
+					<a class="btn btn-danger" href="donate.html">
+						<i class="fa fa-usd"></i>&nbsp;&nbsp;Donate
+					</a>
+				</p>
+				<div id="4.2.2" class="sub-title">Version 1.1.9 - Php<span class="label label-danger label-doc">New</span></div>
+				<p>This project uses the Php language, supports dynamic Ajax page server query mode. For the export function of the server, we don't handle the data format in dynamic Ajax query mode, because Php syntax to format dates, numbers with our given syntax are different. If you want to solve this problem, you can format those data in SQL.</p>
+				<p>In this project the database uses MySQL, if you need to transplant to other databases, you can modified some SQL, such as paging function in sever etc..</p>
+				<p>If you cannot do the transplantation youself, you can contact us:</p>
+				<p><a href="mailto:dtgrid@outlook.com"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;Email：dtgrid@outlook.com</a></p>
+				<p>
+					<a class="btn btn-success" href="http://www.dtgrid.com/download/v1.1.9/jquery.dtGrid.v1.1.9.Php.zip" target="_blank">
+						<i class="fa fa-download"></i>&nbsp;&nbsp;Local
+					</a>
+					<a class="btn btn-success" href="https://github.com/dlshouwen/dtgrid/blob/master/projects/v1.1.9/jquery.dtGrid.v1.1.9.Php.zip" target="_blank">
+						<i class="fa fa-github"></i>&nbsp;&nbsp;GitHub
+					</a>
+					<a class="btn btn-success" href="http://git.oschina.net/dlshouwen/dtgrid/blob/master/projects/v1.1.9/jquery.dtGrid.v1.1.9.Php.zip" target="_blank">
+						<i class="fa fa-git"></i>&nbsp;&nbsp;Git@OSC
+					</a>
+					<a class="btn btn-danger" href="donate.html">
+						<i class="fa fa-usd"></i>&nbsp;&nbsp;Donate
+					</a>
+				</p>
+				<div id="4.3" class="title">History</div>
+				<hr />
+				<div id="4.3.1" class="sub-title">Version 1.1.8</div>
+				<p>
+					<div class="btn-group dropup">
+						<button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
+							<i class="fa fa-download"></i>&nbsp;&nbsp;DT Grid v1.1.8&nbsp;&nbsp;<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a href="http://www.dtgrid.com/download/v1.1.8/jquery.dtGrid.v1.1.8.zip" target="_blank">
+									<i class="fa fa-download"></i>&nbsp;&nbsp;Local
+								</a>
+							</li>
+							<li>
+								<a href="https://github.com/dlshouwen/dtgrid/blob/master/projects/v1.1.8/jquery.dtGrid.v1.1.8.zip" target="_blank">
+									<i class="fa fa-github"></i>&nbsp;&nbsp;GitHub
+								</a>
+							</li>
+							<li>
+								<a href="http://git.oschina.net/dlshouwen/dtgrid/blob/master/projects/v1.1.8/jquery.dtGrid.v1.1.8.zip" target="_blank">
+									<i class="fa fa-git"></i>&nbsp;&nbsp;Git@OSC
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="btn-group dropup">
+						<button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
+							<i class="fa fa-download"></i>&nbsp;&nbsp;DT Grid v1.1.8 - Java&nbsp;&nbsp;<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a href="http://www.dtgrid.com/download/v1.1.8/jquery.dtGrid.v1.1.8.Java.Web.App.zip" target="_blank">
+									<i class="fa fa-download"></i>&nbsp;&nbsp;Local
+								</a>
+							</li>
+							<li>
+								<a href="https://github.com/dlshouwen/dtgrid/blob/master/projects/v1.1.8/jquery.dtGrid.v1.1.8.Java.Web.App.zip" target="_blank">
+									<i class="fa fa-github"></i>&nbsp;&nbsp;GitHub
+								</a>
+							</li>
+							<li>
+								<a href="http://git.oschina.net/dlshouwen/dtgrid/blob/master/projects/v1.1.8/jquery.dtGrid.v1.1.8.Java.Web.App.zip" target="_blank">
+									<i class="fa fa-git"></i>&nbsp;&nbsp;Git@OSC
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="btn-group dropup">
+						<button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
+							<i class="fa fa-download"></i>&nbsp;&nbsp;DT Grid v1.1.8 - Php&nbsp;&nbsp;<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a href="http://www.dtgrid.com/download/v1.1.8/jquery.dtGrid.v1.1.8.Php.zip" target="_blank">
+									<i class="fa fa-download"></i>&nbsp;&nbsp;Local
+								</a>
+							</li>
+							<li>
+								<a href="https://github.com/dlshouwen/dtgrid/blob/master/projects/v1.1.8/jquery.dtGrid.v1.1.8.Php.zip" target="_blank">
+									<i class="fa fa-github"></i>&nbsp;&nbsp;GitHub
+								</a>
+							</li>
+							<li>
+								<a href="http://git.oschina.net/dlshouwen/dtgrid/blob/master/projects/v1.1.8/jquery.dtGrid.v1.1.8.Php.zip" target="_blank">
+									<i class="fa fa-git"></i>&nbsp;&nbsp;Git@OSC
+								</a>
+							</li>
+						</ul>
+					</div>
+					<a class="btn btn-danger" href="donate.html">
+						<i class="fa fa-usd"></i>&nbsp;&nbsp;Donate
+					</a>
+				</p>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="footer">
+		<div class="container copyright">
+			<a href="http://www.dlshouwen.com">DaLian ShouWen Technology co., Ltd.</a> Products
+			&nbsp;&nbsp;
+			<a href="http://dtgrid.com">dtgrid.com</a>
+		</div>
+	</div>
+	<div id="back-to-top" class="back-to-top" title="Back To Top"><i class="fa fa-arrow-circle-up"></i></div>
+</body>
+</html>

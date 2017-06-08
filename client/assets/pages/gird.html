@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/plugins/dtgrid/jquery.dtGrid.css">
+</head>
+<body>
+
+
+<div id="dtGridContainer_2_1_3" class="dt-grid-container"></div>
+<div id="dtGridToolBarContainer_2_1_3" class="dt-grid-toolbar-container"></div>
+
+
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/plugins/dtgrid/jquery.dtGrid.min.js"></script>
+<script src="../js/plugins/dtgrid/i18n/zh-cn.js"></script>
+<script>
+
+    $(function(){
+        var dtGridColumns_2_1_2 = [
+
+            {id:'code', title:'用户编号', type:'string', columnClass:'text-center'},
+
+            {id:'name', title:'用户名称', type:'string', columnClass:'text-center'},
+
+            {id:'sex', title:'性别', type:'string', columnClass:'text-center'},
+
+            {id:'salary', title:'薪水', type:'number', format:'#,###.00', columnClass:'text-center', hideType:'xs'},
+
+            {id:'degree', title:'学历', type:'string', columnClass:'text-center', hideType:'sm|xs'}
+
+        ];
+        var datas = [
+            {"code":'001',"name":"黄锦","sex":"男","salary":"888","degree":"本科"},
+            {"code":'001',"name":"黄锦","sex":"男","salary":"888","degree":"本科"},
+            {"code":'001',"name":"黄锦","sex":"男","salary":"888","degree":"本科"},
+            {"code":'001',"name":"黄锦","sex":"男","salary":"888","degree":"本科"},
+            {"code":'001',"name":"黄锦","sex":"男","salary":"888","degree":"本科"}
+        ]
+        var dtGridOption_2_1_2 = {
+            lang : 'zh-cn',
+            ajaxLoad : false,
+            exportFileName : '用户列表',
+            datas : datas,
+            columns : dtGridColumns_2_1_2,
+            gridContainer : 'dtGridContainer_2_1_3',
+            toolbarContainer : 'dtGridToolBarContainer_2_1_3',
+            tools : '',
+            pageSize : 10,
+            pageSizeLimit : [10, 20, 50]
+        };
+        var grid_2_1_2 = $.fn.DtGrid.init(dtGridOption_2_1_2);
+        grid_2_1_2.load();
+    });
+
+</script>
+</body>
+</html>

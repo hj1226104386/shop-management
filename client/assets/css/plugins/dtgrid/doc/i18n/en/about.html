@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<head>
+	<title>DT Grid, DESTINY Grid About</title>
+	<meta name="Keywords" content="DT Grid,DESTINY Grid, What is DT Grid, DT Grid Example, DT Grid Reference, DT Grid Download, Responsive Grid, jQuery Grid Controls, JavaScript, Cross Brower"/>
+	<meta name="Description" content="DESTINY Grid(DT Grid) is a responsive grid by DaLian ShouWen Technology Co., it's based on MIT open source licenses. It's with cross brower support, procedures clear, powerful, efficient load, and many other good qualities, it perhaps the best known reponstive grid controls."/>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<!-- favicon -->
+	<link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+	<!-- jQuery -->
+	<script type="text/javascript" src="../../../dependents/jquery/jquery.min.js"></script>
+	<!-- bootstrap -->
+	<script type="text/javascript" src="../../../dependents/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../../dependents/bootstrap/css/bootstrap.min.css" />
+	<!--[if lt IE 9]>
+		<script src="../../../dependents/bootstrap/plugins/ie/html5shiv.js"></script>
+		<script src="../../../dependents/bootstrap/plugins/ie/respond.js"></script>
+	<![endif]-->
+	<!--[if lt IE 8]>
+		<script src="../../../dependents/bootstrap/plugins/ie/json2.js"></script>
+	<![endif]-->
+	<!-- font-awesome -->
+	<link rel="stylesheet" type="text/css" href="../../../dependents/fontAwesome/css/font-awesome.min.css" media="all" />
+	<!-- toTop -->
+	<script type="text/javascript" src="../../toTop/jquery.toTop.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../toTop/jquery.toTop.css" />
+	<!-- jquery pin -->
+	<script type="text/javascript" src="../../jquery.pin/jquery.pin.js"></script>
+	<!-- doc css -->
+	<link rel="stylesheet" type="text/css" href="../../css/doc.css" />
+	<!-- icon css -->
+	<link rel="stylesheet" type="text/css" href="../../css/icons.css" />
+	<script type="text/javascript">
+	$(function(){
+		//Pin the Left Sider
+		$(".left-sider").pin({
+			minWidth: 992,
+			pinCallback : function(){
+				$(".left-sider").css('max-height', $(window).height()-112);
+			},
+			unpinCallback : function(){
+				$(".left-sider").css('max-height', $(window).height()-112);
+			}
+		});
+		//Show or Hide the Left Sider's Sub Menu
+		$(".left-sider>ul>li>a").toggle(function(){
+			$(this).children('i').removeClass('fa-caret-right').addClass('fa-caret-down');
+			$(this).next('ul').slideDown(200);
+		}, function(){
+			$(this).children('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+			$(this).next('ul').slideUp(200);
+		});
+		//All Close Except the First Menu
+		$(".left-sider>ul>li>ul:not(:first)").hide();
+		$(".left-sider>ul>li>a:first").click();
+	});
+	</script>
+</head>
+<body>
+	<header class="navbar navbar-inverse navbar-absolute-top" role="banner">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+					<span class="sr-only">Tools</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="http://www.dtgrid.com" class="navbar-brand">
+					<i class="icon icon-destiny-grid"></i>&nbsp;&nbsp;DESTINY Grid
+				</a>
+			</div>
+			<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+				<ul class="nav navbar-nav">
+					<li id="nav_home">
+						<a href="index.html"><i class="fa fa-home"></i>&nbsp;&nbsp;Home</a>
+					</li>
+					<li id="nav_example">
+						<a href="example.html"><i class="fa fa-table"></i>&nbsp;&nbsp;Example</a>
+					</li>
+					<li id="nav_reference">
+						<a href="reference.html"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;Reference</a>
+					</li>
+					<li id="nav_download">
+						<a href="download.html"><i class="fa fa-download"></i>&nbsp;&nbsp;Download</a>
+					</li>
+					<li id="nav_about" class="active">
+						<a href="about.html"><i class="fa fa-info"></i>&nbsp;&nbsp;About</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li id="nav_donate" class="language">
+						<a href="javascript:void(0);" data-toggle="dropdown"><i class="fa fa-language"></i>&nbsp;&nbsp;Language</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="javascript:void(0);">English</a></li>
+							<li><a href="../zh-cn/about.html">Simple Chinese</a></li>
+						</ul>
+					</li>
+					<li id="nav_donate" class="donate">
+						<a href="donate.html"><i class="fa fa-usd"></i>&nbsp;&nbsp;Donate</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<div class="container">
+		<div class="col-md-3">
+			<div class="layout left-sider">
+				<ul>
+					<li><a href="#5.1"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;DT Grid Team</a></li>
+					<li><a href="#5.2"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;DaLian ShouWen</a></li>
+					<li><a href="#5.3"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;License</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="layout main-container">
+				<div id="5.1" class="title">DT Grid Team</div>
+				<hr />
+				<p>The DT Grid team found by the Dalian Shou Wen Technology Co. Ltd. in 2014, the main members of the team are from the DESTINY CORE project's members, we have multiple server and web programming experience.</p>
+				<p><a href="mailto:dtgrid@outlook.com"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;Email：dtgrid@outlook.com</a></p>
+				<div id="5.2" class="title">DaLian ShouWen</div>
+				<hr />
+				<p><a href="http://www.dlshouwen.com" target="_blank">Dalian ShouWen Technology Co. Ltd.</a> (hereinafter referred to as the Dalian ShouWen) was founded in 2014, is a strong technology of IT network service enterprises with many IT practitioners who has years of experience, provide software technology products, services and industry project information system oriented solution, have many cooperative enterprises in dalian.</p>
+				<p>Dalian ShouWen is an emerging enterprise IT network, we have the strength, the ability to have the confidence to grow and develop.</p>
+				<p>Facing the future, Dalian ShouWen strict requirements, through the products, projects to improve and strengthen ourselves, we will is famous for exquisite.</p>
+				<div id="5.3" class="title">License</div>
+				<hr />
+				<p>MIT, please refer to the <a href="http://en.wikipedia.org/wiki/MIT_License" target="_blank">Wikipedia MIT</a>.</p>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="footer">
+		<div class="container copyright">
+			<a href="http://www.dlshouwen.com">DaLian ShouWen Technology co., Ltd.</a> Products
+			&nbsp;&nbsp;
+			<a href="http://dtgrid.com">dtgrid.com</a>
+		</div>
+	</div>
+	<div id="back-to-top" class="back-to-top" title="Back To Top"><i class="fa fa-arrow-circle-up"></i></div>
+</body>
+</html>
