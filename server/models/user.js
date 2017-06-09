@@ -9,10 +9,13 @@ let db = require('./db.js');//引入数据库连接操作模块
 
 //将用户的数据保存进对象
 function User(users) {
-    this.username = users.username;
-    this.password = users.password;
-    this.email = users.email;
-    this.user_id = users.user_id;//用户id
+    if(users){//传了参就保存用户信息,否则不做操作
+        this.username = users.username;
+        this.password = users.password;
+        this.email = users.email;
+        this.user_id = users.user_id;//用户id
+    }
+
 }
 
 //查找用户名
@@ -31,6 +34,10 @@ User.prototype.saveInfo = function(callback){
 //根据用户id查找用户
 User.prototype.findUserById = function(callback){
     db.query('select * from user where id = ?',[this.user_id],callback);
+}
+//查找所有商户账户信息,不查询管理员账户
+User.prototype.findAlltenants = function (callback) {
+    db.query('SELECT name,gender,username,status,shopname FROM `user` WHERE is_vip = "0"',callback);
 }
 
 //导出User对象

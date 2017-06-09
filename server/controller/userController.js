@@ -105,21 +105,22 @@ module.exports.doLogin = function (req, res, next) {
         var getData = data[0];
         console.log('我是getData:' + getData);
         console.log(data);//打印查询结果
-        if (data.length = 0) {//说明查询到数据;
+        if (data.length == 0) {//说明未查询到数据;
             return res.send({
-                msg: '用户名或密码错误!'
+                msg: '账号不存在!'
             })
             res.end();
-        }
-        //判断账号是否是管理员账号
-        if (isVip != 0) {//说明是通过管理员页面登录
-            if (getData.is_vip != 1) {
+        }else{//查询到数据
+            //判断用户数据是否被禁用
+            if(getData['status']==1){//禁用状态
                 return res.send({
-                    msg: '您不是管理员!'
+                    msg: '该账号暂被禁用!'
                 })
                 res.end();
             }
         }
+
+
 
         //判断密码
         formUser.password = utils.md5(formUser.password);
@@ -128,6 +129,24 @@ module.exports.doLogin = function (req, res, next) {
                 msg: '用户名或密码错误!'
             })
             res.end();
+        }else{
+            //判断账号是否是管理员账号
+            if (isVip != 0) {//说明是通过管理员页面登录
+                if (getData.is_vip != 1) {
+                    return res.send({
+                        msg: '您不是管理员哦!'
+                    })
+                    res.end();
+                }
+            }else{//通过普通会员页面登录
+                if (getData.is_vip != 0) {
+                    return res.send({
+                        msg: '请去管理员窗口登录!'
+                    })
+                    res.end();
+                }
+
+            }
         }
 
         //判断是否记住我
@@ -179,4 +198,22 @@ module.exports.getSession = function (req,res,next) {
         }
     })
 
+}
+
+//查询所有的商户信息
+module.exports.findTenants = function (req,res,next) {
+    let queryTenants = new User({});//创建User函数实例,执行其中的查询所有商户信息的查询操作
+    queryTenants.findAlltenants(function (err,data) {
+        if(err) throw err;
+        if(data.length!=0){
+            return res.send({
+                datas:data
+            })
+        }else{
+            return res.send({
+                msg:'数据查询成功!',
+                data:data
+            })
+        }
+    })
 }

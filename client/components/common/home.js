@@ -24,12 +24,14 @@
             that.$http.post('/getSession').then((res) => {//传参不能直接写一个对象
                 console.log(res.body);//返回的信息是从session中拿的
                 if (res.body.getSessUserName) {//用户验证通过
-                    that.userName = res.body.getSessUserName;
+
                     //判断是否是管理员账号
                     if (res.body.getSessIsVip == 0) {//普通用户
                         that.isVip = false;
+                        that.userName = res.body.getSessUserName+'(商户)';
                     } else {//管理员
                         that.isVip = true;
+                        that.userName = res.body.getSessUserName+'(管理员)';
                     }
                     // alert(that.isVip)
                 } else {

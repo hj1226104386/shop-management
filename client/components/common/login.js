@@ -94,74 +94,82 @@
 `,
         data: function () {
             return {
-                username:'',
-                password:'',
-                remember_me:'',
-                tipMsg:'',
-                tipMsg2:'',
-                judgeIsVip:false
+                username: '',
+                password: '',
+                remember_me: '',
+                tipMsg: '',
+                tipMsg2: '',
+                judgeIsVip: false
             }
         },
         mounted: function () {
             that = this;
-            that.$http.post('/beforeLogin').then((res)=>{//传参不能直接写一个对象
+            that.$http.post('/beforeLogin').then((res) => {//传参不能直接写一个对象
                 console.log(res.body.remember_me)
-                if(res.body.remember_me){
+                if (res.body.remember_me) {
                     //往表单中回填数据
                     that.username = res.body.username;
-                    that.password=res.body.password;
+                    that.password = res.body.password;
                     that.remember_me = true;
-                }else{
+                } else {
                     that.username = res.body.username;
                     that.username = '';
                 }
             })
 
         },
-        methods:{
-            doLogin:function(){
+        methods: {
+            doLogin: function () {
                 that = this;
                 //先判断是否有输入用户名密码
-                if(!that.username||!that.password){
+                if (that.username=='' || that.password=='') {
                     that.tipMsg = '请输入登录信息';
                     return;
                 }
                 var formData = {}
-                if(that.judgeIsVip==false){//普通会员登录
-                    formData = {username:this.username,password:this.password,vip:0,remember_me:this.remember_me};
-                    that.$http.post('/doLogin',formData,{emulateJSON:true}).then((res)=>{//传参不能直接写一个对象
-                        console.log(res.body)
-                        if(res.body.userIsVip!=0) {
-                            that.tipMsg = '请去管理专用窗口登录!';
-                            return;
-                        }else{
-                            that.tipMsg = res.body.msg+'2s后跳至首页';
+                if (that.judgeIsVip == false) {//普通会员登录
+                    formData = {
+                        username: this.username,
+                        password: this.password,
+                        vip: 0,
+                        remember_me: this.remember_me
+                    };
+                    that.$http.post('/doLogin', formData, {emulateJSON: true}).then((res) => {//传参不能直接写一个对象
+                        if (res.body.userIsVip == 0) {//说明是普通会员
+                            that.tipMsg = res.body.msg + '2s后跳至首页';
                             setTimeout(function () {
                                 that.$router.push({path: '/'})
-                            },2000)
+                            }, 2000)
+                        } else {
+                            that.tipMsg = res.body.msg;
+                            return;
                         }
                     })
-                }else{//管理员登录
-                    formData = {username:this.username,password:this.password,vip:1};
-                    that.$http.post('/doLogin',formData,{emulateJSON:true}).then((res)=>{//传参不能直接写一个对象
+                } else {//管理员登录
+                    formData = {
+                        username: this.username,
+                        password: this.password,
+                        vip: 1
+                    };
+                    that.$http.post('/doLogin', formData, {emulateJSON: true}).then((res) => {//传参不能直接写一个对象
                         console.log(res);
-                        if(res.body.userIsVip!=1){
-                            that.tipMsg2 = '你不是管理员哦!';
+                        if (res.body.userIsVip != 1) {
+                            that.tipMsg2 = res.body.msg;
                             return;
-                        }else{
-                            that.tipMsg2 = res.body.msg+'2s后跳至首页';
+                        } else {
+                            that.tipMsg2 = res.body.msg + '2s后跳至首页';
                             setTimeout(function () {
                                 that.$router.push({path: '/'})
-                            },2000)
+                            }, 2000)
                         }
 
                     })
                 }
             },
-            isCommon:function () {
+            isCommon: function () {
                 this.judgeIsVip = false;
             },
-            isVip:function () {
+            isVip: function () {
                 this.judgeIsVip = true;
                 //清空账号密码
                 this.username = '';
