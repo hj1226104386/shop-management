@@ -11,7 +11,7 @@ var pool  = mysql.createPool({
     host     : '127.0.0.1',
     user     : 'root',
     password : 'root',
-    database : 'supermarketmanager'
+    database : 'temp'
 });
 //数据库查询
 module .exports.query = function (sql,params,callback) {

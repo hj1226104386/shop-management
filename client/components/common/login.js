@@ -31,6 +31,14 @@
                                     <input id="cemail" v-model="password" type="password" class="form-control" name="password" required="" aria-required="true">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-3">
+                                    <input v-model="vcode" type="text" class="form-control" name="vcode" placeholder="验证码">
+                                </div>
+                                <div class="col-sm-3" style="padding-left:0;">
+                                    <img @click="vcode01" class="vcode-img" width="80" v-bind:src="codeUrl" style="cursor:pointer;">
+                                </div>
+                            </div>
                             <div class="form-group" style="margin-bottom:0;">
                                 <div class="col-sm-8 col-sm-offset-3">
                                     <input type="checkbox" v-model="remember_me" class="checkbox" id="agree" name="rememberMe" style="display:inline-block;vertical-align:middle;">
@@ -68,6 +76,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-3">
+                                    <input v-model="vcode" type="text" class="form-control" name="vcode" placeholder="验证码">
+                                </div>
+                                <div class="col-sm-3" style="padding-left:0;">
+                                    <img @click="vcode02" class="vcode-img2" width="80" v-bind:src="codeUrl"  style="cursor:pointer;">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-3">
                                     <span style="color:red;" v-text="tipMsg2"></span>
                                 </div>
@@ -99,13 +115,15 @@
                 remember_me: '',
                 tipMsg: '',
                 tipMsg2: '',
-                judgeIsVip: false
+                judgeIsVip: false,
+                vcode: '',
+                codeUrl:'/getVcode'
             }
         },
         mounted: function () {
             that = this;
             that.$http.post('/beforeLogin').then((res) => {//传参不能直接写一个对象
-                console.log(res.body.remember_me)
+                // console.log(res.body.remember_me)
                 if (res.body.remember_me) {
                     //往表单中回填数据
                     that.username = res.body.username;
@@ -122,7 +140,7 @@
             doLogin: function () {
                 that = this;
                 //先判断是否有输入用户名密码
-                if (that.username=='' || that.password=='') {
+                if (that.username == '' || that.password == '' || that.vcode == '') {
                     that.tipMsg = '请输入登录信息';
                     return;
                 }
@@ -132,7 +150,8 @@
                         username: this.username,
                         password: this.password,
                         vip: 0,
-                        remember_me: this.remember_me
+                        remember_me: this.remember_me,
+                        vcode: this.vcode
                     };
                     that.$http.post('/doLogin', formData, {emulateJSON: true}).then((res) => {//传参不能直接写一个对象
                         if (res.body.userIsVip == 0) {//说明是普通会员
@@ -142,6 +161,7 @@
                             }, 2000)
                         } else {
                             that.tipMsg = res.body.msg;
+                            $('.vcode-img').click();
                             return;
                         }
                     })
@@ -149,11 +169,13 @@
                     formData = {
                         username: this.username,
                         password: this.password,
-                        vip: 1
+                        vip: 1,
+                        vcode: this.vcode
                     };
                     that.$http.post('/doLogin', formData, {emulateJSON: true}).then((res) => {//传参不能直接写一个对象
-                        console.log(res);
+                        // console.log(res);
                         if (res.body.userIsVip != 1) {
+                            $('.vcode-img2').click();
                             that.tipMsg2 = res.body.msg;
                             return;
                         } else {
@@ -168,13 +190,21 @@
             },
             isCommon: function () {
                 this.judgeIsVip = false;
+                this.vcode = '';
             },
             isVip: function () {
                 this.judgeIsVip = true;
                 //清空账号密码
                 this.username = '';
                 this.password = '';
+                this.vcode = '';
                 this.remember_me = false;
+            },
+            vcode01:function () {
+                this.codeUrl = '/getVcode?'+(+new Date());
+            },
+            vcode02:function () {
+                this.codeUrl = '/getVcode?'+(+new Date());
             }
         }
     })

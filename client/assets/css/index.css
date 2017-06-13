@@ -439,3 +439,10 @@ html,body{
 .h-padding15 {
     paddign:20px 15px!important;
 }
+#h-manager-goods-list p {
+    width: 100%;
+    display:block;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}

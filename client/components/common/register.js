@@ -38,6 +38,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-3">
+                                    <input v-model="vcode" type="text" class="form-control" name="vcode" placeholder="验证码">
+                                </div>
+                                <div class="col-sm-3" style="padding-left:0;">
+                                    <img @click="vcodeRegister" class="vcode-img" width="80" v-bind:src="codeUrl" style="cursor:pointer;">
+                                </div>
+                            </div>
+                            <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
                             <span style="color:red;" v-text="tipMsg"></span>
 </div>
@@ -59,7 +67,9 @@
                 username:'',
                 password:'',
                 email:'',
-                tipMsg:''
+                tipMsg:'',
+                vcode:'',
+                codeUrl:'/getVcode'
 
             }
         },
@@ -69,10 +79,10 @@
         methods:{
             register:function(){
                 that = this;
-                const formData = {username:this.username,password:this.password,email:this.email};
+                const formData = {username:this.username,password:this.password,email:this.email,vcode:this.vcode};
                 that.$http.post('/doRegister',formData,{emulateJSON:true}).then(
                     (res)=>{
-                        console.log(res);
+                        // console.log(res);
                         if(res.body.msg=='恭喜您,注册成功!'){
                             that.tipMsg = res.body.msg+'3s后自动跳转到首页';
                             setTimeout(function () {
@@ -80,11 +90,15 @@
                             },2000)
                         }else{
                             that.tipMsg = res.body.msg;
+                            $('.vcode-img').click();
                         }
                     },
                     (res)=>{
                         alert('失败');
                     })
+            },
+            vcodeRegister:function () {
+               this.codeUrl = '/getVcode?'+(+new Date());
             }
         }
     })

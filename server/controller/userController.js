@@ -6,6 +6,7 @@
 //这里做的是具体处理用户的请求;
 const utils = require('utility');//md5加密
 const User = require('../models/user.js');
+const getPic = require('../common/getPic.js');//处理验证码函数
 
 //注册
 module.exports.doRegister = function (req, res, next) {
@@ -14,6 +15,7 @@ module.exports.doRegister = function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email;
+    let vcode = req.body.vcode;
     console.log(req.body);
     let formUser = new User({username: username, password: password, email: email});
     //先查找用户名是否存在
@@ -39,6 +41,14 @@ module.exports.doRegister = function (req, res, next) {
                 })
                 res.end();
             }
+            //继续判断验证码是否正确
+            var sessionVcode = req.session.vcode;
+            if(vcode!=sessionVcode){//验证码不正确
+                return res.send({
+                    msg: '验证码不正确,点击切换验证码!'
+                })
+                res.end();
+            }
 
             //插入数据
             //邮箱和用户名都不重复,保存用户,保存前先加密
@@ -47,10 +57,10 @@ module.exports.doRegister = function (req, res, next) {
                 //拿到返回的主键id信息
                 var getInsertId = data.insertId;
                 if (err) throw err;
-            //至此说明用户注册成功了,将信息写入session和cookie
+                //至此说明用户注册成功了,将信息写入session和cookie
                 var age = 1000 * 60 * 60 * 24 * 7;//设置cookie生命周期
                 var base64Psd = utils.base64encode(password);//将密码转换城base64形式
-                res.cookie('username',username,{maxAge: age});
+                res.cookie('username', username, {maxAge: age});
                 res.cookie('password', base64Psd, {maxAge: age});
                 req.session.user_id = getInsertId;
                 req.session.username = username;
@@ -76,7 +86,7 @@ module.exports.beforeLogin = function (req, res, next) {
         var remember_me = req.cookies.remember_me;
         password = utils.base64decode(password);//将密码解密成utf-8格式
         obj = {
-            username:username, password:password, remember_me:remember_me
+            username: username, password: password, remember_me: remember_me
         }
         return res.send(obj);
     } else {
@@ -96,6 +106,7 @@ module.exports.doLogin = function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
     let remember_me = req.body.remember_me;
+    let vcode = req.body.vcode;
     console.log('登录时看rem是否传到后台' + remember_me)
     let isVip = req.body.vip;
     let formUser = new User({username: username, password: password, remember_me: remember_me});
@@ -110,16 +121,15 @@ module.exports.doLogin = function (req, res, next) {
                 msg: '账号不存在!'
             })
             res.end();
-        }else{//查询到数据
+        } else {//查询到数据
             //判断用户数据是否被禁用
-            if(getData['status']==1){//禁用状态
+            if (getData['status'] == 1) {//禁用状态
                 return res.send({
                     msg: '该账号暂被禁用!'
                 })
                 res.end();
             }
         }
-
 
 
         //判断密码
@@ -129,7 +139,15 @@ module.exports.doLogin = function (req, res, next) {
                 msg: '用户名或密码错误!'
             })
             res.end();
-        }else{
+        } else {
+            //继续判断验证码是否正确
+            var sessionVcode = req.session.vcode;
+            if(vcode!=sessionVcode){//验证码不正确
+                return res.send({
+                    msg: '验证码不正确,点击切换验证码!'
+                })
+                res.end();
+            }
             //判断账号是否是管理员账号
             if (isVip != 0) {//说明是通过管理员页面登录
                 if (getData.is_vip != 1) {
@@ -138,7 +156,7 @@ module.exports.doLogin = function (req, res, next) {
                     })
                     res.end();
                 }
-            }else{//通过普通会员页面登录
+            } else {//通过普通会员页面登录
                 if (getData.is_vip != 0) {
                     return res.send({
                         msg: '请去管理员窗口登录!'
@@ -166,7 +184,7 @@ module.exports.doLogin = function (req, res, next) {
         req.session.user_id = getData.id;
         req.session.username = getData.username;
         req.session.is_vip = getData.is_vip;
-        console.log('查到的所有数据:' + req.session.user_id+'/'+req.session.username)
+        console.log('查到的所有数据:' + req.session.user_id + '/' + req.session.username)
         //登录成功
         return res.send({
             userIsVip: req.session.is_vip,
@@ -175,7 +193,7 @@ module.exports.doLogin = function (req, res, next) {
     })
 }
 //读取session
-module.exports.getSession = function (req,res,next) {
+module.exports.getSession = function (req, res, next) {
     //先判断cookie有没有用户名,有的话继续查数据库,看用户信息中的id和session中的id是否一致,否则跳回登录页
     console.log(req.session);
     //拿到用户id,传入到User对象中,先创建User实例
@@ -183,17 +201,17 @@ module.exports.getSession = function (req,res,next) {
     let formUser = new User({user_id: user_id});
     formUser.findUserById(function (err, data) {
         if (err) throw err;
-        if(data.length!=0){//说明根据id查到用户信息了
+        if (data.length != 0) {//说明根据id查到用户信息了
             console.log(req.session.is_vip)
             return res.send({
-                getSessUserName:req.session.username,
-                getSessIsVip:req.session.is_vip
+                getSessUserName: req.session.username,
+                getSessIsVip: req.session.is_vip
             });//将用户信息返回
-        }else{
+        } else {
             console.log('没有查到用户信息')
             return res.send({
-                getSessUserName:'',
-                getSessIsVip:''
+                getSessUserName: '',
+                getSessIsVip: ''
             });
         }
     })
@@ -201,19 +219,168 @@ module.exports.getSession = function (req,res,next) {
 }
 
 //查询所有的商户信息
-module.exports.findTenants = function (req,res,next) {
+module.exports.findTenants = function (req, res, next) {
     let queryTenants = new User({});//创建User函数实例,执行其中的查询所有商户信息的查询操作
-    queryTenants.findAlltenants(function (err,data) {
-        if(err) throw err;
-        if(data.length!=0){
+    queryTenants.findAlltenants(function (err, data) {
+        if (err) throw err;
+        if (data.length != 0) {
             return res.send({
-                datas:data
+                datas: data
+            })
+        } else {
+            return res.send({
+                msg: '数据查询成功!',
+                data: data
+            })
+        }
+    })
+}
+
+//删除一条商户账号信息
+module.exports.deleteOne = function (req, res, next) {
+    let id = req.body.id;
+    let formUser = new User({id: id});//创建User函数实例
+    formUser.deleteOne(function (err, data) {
+        if (err) throw err;
+        console.log(data);
+        if (data.affectedRows != 0) {//成功
+            return res.json({
+                code: 0
+            })
+        } else {
+            return res.send({//失败
+                code: 1
+            })
+        }
+
+    })
+}
+//恢复一个商户账号
+module.exports.recover = function (req, res, next) {
+    let id = req.body.id;
+    let formUser = new User({id:id});//创建User函数实例
+    formUser.findUser(function (err,data) {
+        if(err) throw err;
+        if(data.length!=0){//说明查到数据
+            //更新数据
+            formUser.recover(function (err,update) {
+                if(err) throw err;
+                if(data.affectedRows!=0){//更新成功
+                    return res.send({code:'0'})
+                }else{
+                    return res.send({code:'1'})
+                }
+
+            })
+        }else{
+            return res.send({msg:'账号不存在!'})
+        }
+    })
+}
+//禁用一个商户账号
+module.exports.forbidden = function (req, res, next) {
+    let id = req.body.id;
+    let formUser = new User({id:id});//创建User函数实例
+    formUser.findUser(function (err,data) {
+        if(err) throw err;
+        console.log(data)
+        if(data.length!=0){//说明查到数据
+            //更新数据
+            formUser.forbidden(function (err,update) {
+                if(err) throw err;
+                console.log(update)
+                if(data.affectedRows!=0){//更新成功
+                    return res.send({code:'0'})
+                }else{
+                    return res.send({code:'1'})
+                }
+
+            })
+        }else{
+            return res.send({msg:'账号不存在!'})
+        }
+    })
+}
+//插入一条新数据
+module.exports.addNewTenant = function (req, res, next) {
+    let shopname = req.body.shopname;
+    let name = req.body.name;
+    let age = req.body.age;
+    let gender = req.body.gender;
+    let phone = req.body.phone;
+    let email = req.body.email;
+    let address = req.body.address;
+    let formUser = new User({shopname,name,age,gender,phone,email,address});//创建User函数实例
+    formUser.addNewTenant(function (err,data) {
+        if(err) throw err;
+        if(data.affectedRows!=0){//数据插入成功
+            return res.send({
+                code:'0'
             })
         }else{
             return res.send({
-                msg:'数据查询成功!',
-                data:data
+                code:'1'
             })
         }
+
+    })
+}
+//获取所有商户信息
+module.exports.getAllMsg = function (req, res, next) {
+    let id = req.body.id;
+    let formUser = new User({id:id});//创建User函数实例
+    formUser.getAllMsg(function (err,data) {
+        if(err) throw err;
+        console.log(data)
+        if(data.length!=0){//说明查到数据
+            return res.send({'datas':data});//将所有数据返回
+        }else{
+            return res.send({msg:'账号不存在!'})
+        }
+    })
+}
+//更新商户所有信息
+module.exports.updateManyMsg = function (req, res, next) {
+    let shopname = req.body.shopname;
+    let name = req.body.name;
+    let gender = req.body.gender;
+    let age = req.body.age;
+    let phone = req.body.phone;
+    let email = req.body.email;
+    let address = req.body.address;
+    let id = req.body.id;
+    let formUser = new User({shopname,name,gender,age,phone,email,address,id});//创建User函数实例
+    formUser.updateManyMsg(function (err,data) {
+        if(err) throw err;
+        if(data.changedRows!=0){//批量更新成功
+            return res.send({
+                code:'0'
+            })
+        }else{
+            return res.send({
+                code:'1'
+            })
+        }
+
+    })
+}
+module.exports.getVcode = function (req,res,next) {
+    var getObj = getPic.getVcode();//拿到十六进制文件流和验证码内容
+    var vcode = getObj.vcode+'';//将数字隐式转成字符串
+    var picture = getObj.buf;//十六进制文件流
+    req.session.vcode = vcode;//写入session,方便用户拿到;
+    return res.send(picture);
+}
+//拿到一个商户的所有商品
+module.exports.getOneTenantGoods = function (req,res,next) {
+    var getId = req.body.id;
+    console.log('getId:'+getId)
+    let formUser = new User({id:getId});//创建User函数实例
+    formUser.getOneTenantGoods(function (err,data) {
+        if(err) throw err;
+        console.log(data);
+        return res.send({
+            datas:data
+        });
     })
 }
