@@ -78,11 +78,9 @@
                     <li>
                         <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">功能 </span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="">个人中心</a>
+                            <li><a class="J_menuItem" href="#/personal">个人中心</a>
                             </li>
-                            <li><a class="J_menuItem" href="">修改密码</a>
-                            </li>
-                            <li><a class="J_menuItem" href="">修改地址</a>
+                            <li><a class="J_menuItem" href="#/changePsd">修改密码</a>
                             </li>
                         </ul>
                     </li>

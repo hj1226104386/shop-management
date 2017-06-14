@@ -283,12 +283,10 @@ module.exports.forbidden = function (req, res, next) {
     let formUser = new User({id:id});//创建User函数实例
     formUser.findUser(function (err,data) {
         if(err) throw err;
-        console.log(data)
         if(data.length!=0){//说明查到数据
             //更新数据
             formUser.forbidden(function (err,update) {
                 if(err) throw err;
-                console.log(update)
                 if(data.affectedRows!=0){//更新成功
                     return res.send({code:'0'})
                 }else{
@@ -382,5 +380,83 @@ module.exports.getOneTenantGoods = function (req,res,next) {
         return res.send({
             datas:data
         });
+    })
+}
+//查询一个商户的所有用户订单
+module.exports.getOneTenantOrders = function (req,res,next) {
+    var getId = req.session.user_id;
+    console.log(getId);
+    let formUser = new User({id:getId});//创建User函数实例
+    formUser.getOneTenantOrders(function (err,data) {
+        if(err) throw err;
+        console.log(data);
+        return res.send({
+            datas:data
+        });
+    })
+}
+//获取所有商户的部分信息
+module.exports.getAllTenants = function (req,res,next) {
+    let formUser = new User({});//创建User函数实例
+    formUser.getAllTenants(function (err,data) {
+        if(err) throw err;
+        console.log(data);
+        return res.send({
+            datas:data
+        });
+    })
+}
+//根据id查找当前自己的信息
+module.exports.findMyself = function (req,res,next) {
+    var getId = req.session.user_id;
+    console.log(getId);
+    let formUser = new User({id:getId});//创建User函数实例
+    formUser.findMyself(function (err,data) {
+        if(err) throw err;
+        console.log(data);
+        return res.send({
+            datas:data
+        });
+    })
+}
+//更改密码
+module.exports.changePsd = function (req,res,next) {
+    var getId = req.session.user_id;
+    var newPsd = req.body.newPsd;
+    var oldPsd = req.body.oldPsd;
+    var md5New = utils.md5(newPsd);//将密码转换城base64形式
+    console.log("加密后的新密码:"+md5New);
+    let formUser = new User({md5New:md5New,id:getId});//创建User函数实例
+    formUser.findMyself(function (err,data) {
+        var myMsg = data[0];
+        if(err) throw err;
+        console.log('查出来的个人信息'+myMsg);
+        var getPsd = myMsg.password;
+        //判断新旧密码是否一致,先加密输入的密码
+        var md5Old = utils.md5(oldPsd);//将密码转换城base64形式
+        console.log("数据库密码:"+getPsd);
+        console.log("输入的旧密码:"+md5Old);
+        if(md5Old!=getPsd){
+            return res.send({
+                msg:'旧密码错误!'
+            })
+            res.end();
+        }
+        if(md5New==getPsd){
+            return res.send({
+                msg:'请不要再次使用旧密码!'
+            })
+            res.end();
+        }
+        //更新密码
+        formUser.updatePsd(function (err,data) {
+            var getReturn = data[0]
+            if(err) throw err;
+            console.log("修改密码返回结果:"+getReturn);
+            return res.send({
+                msg:'密码修改成功!'
+            })
+        })
+
     })
 }

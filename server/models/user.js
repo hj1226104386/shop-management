@@ -21,6 +21,9 @@ function User(users) {
         this.name = users.name;
         this.phone = users.phone;
         this.address = users.address;
+        this.newPsd = users.newPsd;
+        this.oldPsd = users.oldPsd;
+        this.md5New = users.md5New;
     }
 
 }
@@ -81,8 +84,21 @@ User.prototype.updateManyMsg = function (callback) {
 User.prototype.getOneTenantGoods = function (callback) {
     db.query('SELECT * FROM `user` u LEFT JOIN classfy cla ON cla.clsid = u.id LEFT JOIN detail det ON det.detailId = cla.id WHERE u.id = ?', [this.id], callback);
 }
-
-
-
+//查询一个商户的所有用户订单(不分类)
+User.prototype.getOneTenantOrders = function (callback) {
+    db.query('SELECT* FROM `user` u LEFT JOIN `order` o ON o.orderId = u.id WHERE u.id = 2;', [this.id], callback);
+}
+//获取所有用户信息
+User.prototype.getAllTenants = function (callback) {
+    db.query('SELECT id,shopname,address FROM `user` WHERE is_vip = "0"', callback);
+}
+//根据用户id查找自己
+User.prototype.findMyself = function (callback) {
+    db.query('select * from user where id = ?', [this.id], callback);
+}
+//更新指定用户名的账户信息(禁用)
+User.prototype.updatePsd = function (callback) {
+    db.query('UPDATE `user` SET password = ? where id = ?', [this.md5New,this.id], callback);
+}
 //导出User对象
 module.exports = User;

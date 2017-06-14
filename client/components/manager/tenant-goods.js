@@ -30,7 +30,7 @@
     
                 <div class="file-box" v-for="item in oneTenantGoods">
                     <div class="file">
-                        <a href=""> <span class="corner"></span>
+                        <a href="#/goodDetail"> <span class="corner"></span>
                             <div class="image">
                                 <img alt="image" class="img-responsive" :src="item.picName">
                             </div>

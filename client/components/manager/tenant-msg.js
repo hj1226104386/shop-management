@@ -16,7 +16,7 @@
 
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-md" role="document">
-    <div class="modal-content animated lightSpeedIn">
+    <div class="modal-content animated fadeInRight">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" v-text="showMsgTitle" style="font-weight:normal;"></h4>

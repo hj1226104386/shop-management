@@ -49,6 +49,14 @@ const routes = [
                 path:'/goodDetail',
                 component:Vue.component('good-detail')
             },
+            {
+                path:'/personal',
+                component:Vue.component('personal-page')
+            },
+            {
+                path:'/changePsd',
+                component:Vue.component('change-psd')
+            },
         ]
     },
 

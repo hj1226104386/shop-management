@@ -22,6 +22,10 @@ Router.post('/addNewTenant',userController.addNewTenant);
 Router.post('/updateManyMsg',userController.updateManyMsg);
 Router.get('/getVcode',userController.getVcode);//获取验证码
 Router.post('/getOneTenantGoods',userController.getOneTenantGoods);//获取一个商户的所有商品
+Router.post('/getOneTenantOrders',userController.getOneTenantOrders);//获取一个商户的所有订单
+Router.post('/getAllTenants',userController.getAllTenants);
+Router.post('/findMyself',userController.findMyself);
+Router.post('/changePsd',userController.changePsd);
 
 
 
