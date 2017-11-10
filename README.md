@@ -18,4 +18,5 @@
 
 ## 项目启动
  ` 浏览器地址栏输入localhost:9000 `
- * username：huangjin,password：666666
+* 管理员账号：username：huangjin,password：666666
+* 商户账号：username：huangjin1,password：666666
