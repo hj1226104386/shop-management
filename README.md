@@ -14,4 +14,5 @@
 ### client Vue搭建的前端页面
 * 进入client文件夹
 * npm install 
-## 浏览器地址栏输入localhost:9000
+## 项目启动
+ ` 浏览器地址栏输入localhost:9000 `
