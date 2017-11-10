@@ -1,4 +1,4 @@
-# 超市购物管理系统（express+ES6+Vue+mysql）
+# 超市购物管理系统（Nodejs+express+ES6+Vue+mysql）
 
 ## 环境搭建
 * 需要安装mysql，nodejs版本>=5.11.0
